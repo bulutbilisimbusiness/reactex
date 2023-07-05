@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import UseStateCounter from "./useStateCounter";
 
 const Spread = () => {
   /* const [name, setName] = useState("Ahmet Can");
@@ -66,6 +67,7 @@ const Spread = () => {
         Full Change
       </button>
       <button onClick={handleToggle}>Toggle</button>
+      {toggle && <UseStateCounter />}
     </div>
   );
 };
