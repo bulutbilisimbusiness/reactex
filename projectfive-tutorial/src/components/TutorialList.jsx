@@ -57,14 +57,6 @@ const TutorialList = ({ tutorials, getTutorials }) => {
                     className="me-2 text-warning"
                     data-bs-toggle="modal"
                     data-bs-target="#open-modal"
-                    // onClick={() =>
-                    //   editTutor({
-                    //     id: 1934,
-                    //     title: "REACT",
-                    //     description: "JS Library",
-                    //   })
-                    // }
-
                     onClick={() => setEditItem(item)}
                   />
                   <AiFillDelete
