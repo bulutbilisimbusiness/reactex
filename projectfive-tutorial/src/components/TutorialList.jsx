@@ -8,7 +8,23 @@ const TutorialList = ({ tutorials, getTutorials }) => {
   const [editItem, setEditItem] = useState("");
 
   console.log(editItem);
-
+  // const tutorials = [
+  //   {
+  //     id: 1,
+  //     title: "JS",
+  //     description: "JS is a programming language",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "React",
+  //     description: "JS library for UI design",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "VUE",
+  //     description: "JS library for UI design",
+  //   },
+  // ]
   const BASE_URL = "https://tutorial-api.fullstack.clarusway.com/tutorials";
 
   const handleDelete = async (id) => {
@@ -57,6 +73,14 @@ const TutorialList = ({ tutorials, getTutorials }) => {
                     className="me-2 text-warning"
                     data-bs-toggle="modal"
                     data-bs-target="#open-modal"
+                    // onClick={() =>
+                    //   editTutor({
+                    //     id: 1934,
+                    //     title: "REACT",
+                    //     description: "JS Library",
+                    //   })
+                    // }
+
                     onClick={() => setEditItem(item)}
                   />
                   <AiFillDelete

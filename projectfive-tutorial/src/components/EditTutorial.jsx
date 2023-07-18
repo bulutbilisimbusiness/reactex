@@ -1,47 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const EditTutorial = ({ editItem, getTutorials }) => {
-  console.log(editItem);
+const EditTutorial = ({ editItem }) => {
+  const { id, description: newDescription, title: newTitle } = editItem;
 
-  const { id, description: oldDescription, title: oldTitle } = editItem;
-  console.log("old", oldTitle);
-  console.log("old", oldDescription);
-  //? https://react.dev/reference/react/useState#usestate
-  //! State degiskeninin degeri, 1.render ile initialState
-  //! parametresinin ilk degerini alir. Dolayisiyle bu durumda
-  //! prop'tan gelen ilk deger state'e aktarilir.
-  //! Sonradan degisen props degerleri useState'e aktarilmaz.
-  //! Eger props'tan gelen degerleri her degisimde useState'e
-  //! aktarmak istersek useEffect hook'unu componentDidUpdate
-  //! gibi kullanabiriz.
-  const [title, setTitle] = useState(oldTitle);
-  const [description, setDescription] = useState(oldDescription);
-
-  //? componentDidUpdate
-  useEffect(() => {
-    setTitle(oldTitle);
-    setDescription(oldDescription);
-    //? oldTitle veya oldDescriptiion her degistiginde local title ve description state'lerimizi guncelliyoruz.
-  }, [oldTitle, oldDescription]);
-
-  console.log(title); //ilk render da undefined
-  console.log(description);
-
-  const editTutor = async (tutor) => {
-    const BASE_URL = "https://tutorial-api.fullstack.clarusway.com/tutorials";
-
-    try {
-      await axios.put(`${BASE_URL}/${id}/`, tutor);
-    } catch (error) {
-      console.log(error);
-    }
-    getTutorials();
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    editTutor({ title, description });
-  };
+  const [title, setTitle] = useState(newTitle);
+  const [description, setDescription] = useState(newDescription);
 
   return (
     <div
@@ -69,7 +32,7 @@ const EditTutorial = ({ editItem, getTutorials }) => {
             />
           </div>
           <div className="modal-body">
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="mb-3">
                 <label htmlFor="title" className="form-label">
                   Title
@@ -100,11 +63,7 @@ const EditTutorial = ({ editItem, getTutorials }) => {
               </div>
 
               <div className="text-end">
-                <button
-                  type="submit"
-                  className="btn btn-danger"
-                  data-bs-dismiss="modal"
-                >
+                <button type="submit" className="btn btn-danger">
                   Submit
                 </button>
               </div>
