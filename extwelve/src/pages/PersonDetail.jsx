@@ -1,10 +1,39 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import NotFound from "./NotFound";
+import spinner from "../img/Spinner-2.gif";
 const PersonDetail = () => {
-  let { state: person } = useLocation();
+  //let { state: person } = useLocation();
   let navigate = useNavigate();
-  console.log(person);
+  // console.log(person);
+  let { id } = useParams();
+  const [person, setPerson] = useState([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getPerson = () => {
+      axios(`https://reqres.in/api/users/${id}`)
+        .then((res) => setPerson(res.data.data))
+        .catch((err) => {
+          setError(true);
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
+    };
+    getPerson();
+  }, [id]);
+  if (error) {
+    return <NotFound />;
+  } else if (loading) {
+    return (
+      <div className="text-center mt-4">
+        <img src={spinner} alt="spinner" />
+      </div>
+    );
+  }
   return (
     <div className="container text-center">
       <h3>
