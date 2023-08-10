@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1{
+    font-size: 2rem;
+  }
+  h2{
+    @apply text-4xl;
+  }
+}
+@layer components{
+  .card {
+    @apply flex flex-col justify-between items-center bg-slate-500 rounded-xl w-3/12 h-[250px];
+  }
+}
